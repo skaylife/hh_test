@@ -25,10 +25,13 @@ SECRET_KEY = 'django-insecure-!f=s_pfz4$4qk72ptccd)+buxq=b4=wemtzu1)999ee98(w5s%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['itpro.bitrix24.ru', '127.0.0.1']
+# ALLOWED_HOSTS = ['*']
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
 X_FRAME_OPTIONS = 'ALLOWALL'
-CSP_FRAME_ANCESTORS = "'self' *"
-CSP_FRAME_ANCESTORS = ["*"]
+# CSRF_TRUSTED_ORIGINS = ['https://itpro.bitrix24.ru']
+# CSP_FRAME_ANCESTORS = "'self' *"
+# CSP_FRAME_ANCESTORS = ["*"]
 
 
 # Application definition
@@ -47,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
