@@ -1,0 +1,28 @@
+
+  <h1>Вакансии и движение сотрудников</h1>
+  <h2>Вакансии на {{ monthYears.month_name }} {{ monthYears.years }} </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Город</th>
+        {% for date in vacancy_records %}
+          <th>{{ date }}</th>
+        {% endfor %}
+        <th>Принято</th>
+        <th>Уволено</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for city in table_data %}
+        <tr>
+          <td>{{ city.name }}</td>
+          {% for date, vacancies in city.items %}
+            {% if date != 'name' %}
+              <td>{{ vacancies }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+

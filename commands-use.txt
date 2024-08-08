@@ -1,0 +1,24 @@
+- Создание виртуального окружения 
+ 
+Установка virtualenv, если он не установлен: "pip install virtualenv" 
+Создание виртуального окружения: "virtualenv env" 
+Или "python -m venv env" 
+ 
+Активация виртуального окружения: 
+На Windows: 
+env\Scripts\activate 
+На macOS и Linux: 
+source env/bin/activate 
+ 
+1. Если вы не в папке проекта, а выше в консоле пишите команду "core\env\Scripts\activate" 
+2. Если уже в проекте с Django, то "env\Scripts\activate" 
+ 
+- Создание Django проекта в виртуальном окружении 
+Установка Django: "pip install django" 
+Создание Django проекта с названием: "django-admin startproject core" 
+Создание Django приложения с названием: "python manage.py startapp " 
+ 
+Запуск сайта на Django: "python manage.py runserver" 
+Команда, чтоб выйти из виртуального окружения в консоли: "deactivate" 
+Команда, чтоб сохранить все новые установленные библиотеки при разработке: "pip freeze >> requirements.txt" 
+Установка библиотек с файла : `requirements.txt` через команду - "pip install -r requirements.txt" 

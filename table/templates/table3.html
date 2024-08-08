@@ -1,0 +1,27 @@
+<div class="container">
+    <!-- <h2 class="subtitle">Движение сотрудников</h2> -->
+    <table class="table is-striped">
+      <thead>
+        <tr>
+          <th>Причины отказов при первичном звонке</th>
+          {% for date in call_date %}
+            <th>{{ date }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in table_data3 %}
+          <tr>
+            <td>{{ row.rows }}</td>
+            {% for date, count in row.items %}
+              {% if date != 'rows' and date != 'reporting_period' %}  <!-- Добавлен check для 'reporting_period' -->
+                <td>{{ count }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+

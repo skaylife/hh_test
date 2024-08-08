@@ -1,0 +1,27 @@
+<div class="container">
+    <!-- <h2 class="subtitle">Движение сотрудников</h2> -->
+    <table class="table is-striped">
+      <thead>
+        <tr>
+          <th>Воронка подбора персонала</th>
+          {% for date in funnel_data %}
+            <th>{{ date }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in table_data2 %}
+          <tr>
+            <td>{{ row.rows }}</td>
+            {% for date, count in row.items %}
+              {% if date != 'rows' and date != 'reporting_period' %}  <!-- Добавлен check для 'reporting_period' -->
+                <td>{{ count }}</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,35 @@
+<div class="chart">
+    <canvas id="myChart2" width="400" height="200"></canvas>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/data_api2/')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('myChart2').getContext('2d');
+                
+                const chart = new Chart(ctx, {
+                    type: 'bar', // Тип графика (может быть 'bar', 'pie', 'line' и т.д.)
+                    data: {
+                        labels: data.dates,
+                        datasets: data.names.map((name, index) => ({
+                            label: name.rows,
+                            backgroundColor: `rgba(${index * 50 % 255}, ${index * 100 % 255}, ${index * 150 % 255}, 0.5)`,
+                            borderColor: `rgba(${index * 50 % 255}, ${index * 100 % 255}, ${index * 150 % 255}, 1)`,
+                            borderWidth: 1,
+                            data: data.values.slice(index * data.dates.length, (index + 1) * data.dates.length),
+                        }))
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    });
+</script>

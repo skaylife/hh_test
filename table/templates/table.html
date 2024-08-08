@@ -1,0 +1,115 @@
+<div class="container">
+    <h1 class="title">Вакансии и движение сотрудников</h1>
+
+    <div class="columns">
+      <div class="column is-half">
+        <h2 class="subtitle">Добавление вакансий</h2>
+        <form method="POST" action="{% url 'index' %}"> 
+          {% csrf_token %}
+          <div class="field is-grouped">
+            <div class="control">
+            <label class="label">Город</label>
+              <div class="select">
+                <select name="city" required>
+                  {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="control">
+                <label class="label">Дата</label>
+                <div class="control">
+                  <input class="input" type="date" name="date" required>
+                </div>
+            </div>
+            <div class="control">
+                <label class="label">Вакансии</label>
+                <input class="input" type="number" name="vacancies" required>
+              </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary">Добавить вакансию</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="column is-half">
+        <h2 class="subtitle">Добавление движения сотрудников</h2>
+        <form method="POST" action="{% url 'index' %}"> 
+          {% csrf_token %}
+          <div class="field is-grouped">
+            <div class="control">
+             <label class="label">Город</label>
+              <div class="select">
+                <select name="city" required>
+                  {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="control">
+              <label class="label">Месяц</label>
+              <div class="select">
+                <select name="month" required>
+                  {% for month_number, month_name in MONTH_CHOICES %}
+                    <option value="{{ month_number }}">{{ month_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="control">
+              <label class="label">Год</label>
+              <input class="input" type="number" name="year" value="{{ monthYears.years }}" required>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <label class="label">Принято</label>
+              <input class="input" type="number" name="hired">
+            </div>
+            <div class="control">
+              <label class="label">Уволено</label>
+              <input class="input" type="number" name="fired">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary">Добавить движение</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <h2 class="subtitle">Вакансии на {{ monthYears.month_name }} {{ monthYears.years }}</h2>
+    <table class="table is-striped">
+      <thead>
+        <tr>
+          <th>Город</th>
+          {% for date in vacancy_records %}
+            <th>{{ date }}</th>
+          {% endfor %}
+          <th>Принято</th>
+          <th>Уволено</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for city in table_data %}
+          <tr>
+            <td>{{ city.name }}</td>
+            {% for date, vacancies in city.items %}
+              {% if date != 'name' %}
+                <td>{{ vacancies }}</td>
+              {% endif %}
+            {% endfor %}
+            <td>{{ city.hired }}</td>
+            <td>{{ city.fired }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
