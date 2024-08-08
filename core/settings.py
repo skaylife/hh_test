@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-!f=s_pfz4$4qk72ptccd)+buxq=b4=wemtzu1)999ee98(w5s%
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+X_FRAME_OPTIONS = 'ALLOWALL'
+CSP_FRAME_ANCESTORS = "'self' *"
+CSP_FRAME_ANCESTORS = ["*"]
 
 
 # Application definition
