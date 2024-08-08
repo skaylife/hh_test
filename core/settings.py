@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-!f=s_pfz4$4qk72ptccd)+buxq=b4=wemtzu1)999ee98(w5s%
 DEBUG = True
 
 # ALLOWED_HOSTS = ['itpro.bitrix24.ru', '127.0.0.1']
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 # X_FRAME_OPTIONS = 'SAMEORIGIN'
+CSRF_TRUSTED_ORIGINS = ['https://itpro.bitrix24.ru']
 X_FRAME_OPTIONS = 'ALLOWALL'
 # CSRF_TRUSTED_ORIGINS = ['https://itpro.bitrix24.ru']
 # CSP_FRAME_ANCESTORS = "'self' *"
