@@ -8,6 +8,18 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 
 
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.views import LoginView
+
+@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(staff_member_required, name='dispatch')
+class CustomAdminLoginView(LoginView):
+    template_name = 'admin/login.html'
+    redirect_authenticated_user = True
+
+
 def index(request):
 
     # recruitment_funnel_view(request=request) # Вызов второй таблицы 

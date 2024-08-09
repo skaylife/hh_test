@@ -30,10 +30,12 @@ ALLOWED_HOSTS = ['*']
 # X_FRAME_OPTIONS = 'SAMEORIGIN'
 # CSRF_TRUSTED_ORIGINS = ['https://itpro.bitrix24.ru']
 X_FRAME_OPTIONS = 'ALLOWALL'
-CSRF_TRUSTED_ORIGINS = ['https://hh-test-s20x.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://hh-test-s20x.onrender.com', 'https://itpro.bitrix24.ru']
 # CSRF_TRUSTED_ORIGINS = ['https://itpro.bitrix24.ru']
 # CSP_FRAME_ANCESTORS = "'self' *"
 # CSP_FRAME_ANCESTORS = ["*"]
+CSRF_COOKIE_SAMESITE = 'None'  # Или 'Lax', если 'None' вызывает проблемы
+CSRF_COOKIE_SECURE = False  # Установите в True, если используете HTTPS
 
 
 # Application definition
