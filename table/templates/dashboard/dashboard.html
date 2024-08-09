@@ -1,36 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
-<style>
-    .container {
-        margin-top: 4rem;
-        /* margin-bottom: 4rem; */
-    }
-    .chart {
-        margin-top: 2rem;
-        margin-left: 12rem;
-        margin-right: 20rem;
-        /* margin-bottom: 10rem; */
-    }
-</style>
-<body>
-    <div class="container">
-        <h1 class="title"><a href="/"> Dashboard - Отчеты</a></h1>
-    </div>
-    <div class="container">
-        <h2 class="is-size-4 has-text-centered">Работодателей и резюме на HH, с охватом всех регионов РФ</h2>
-        {% include 'dashboard/table4.html' %}
-    </div>
 
-    <div class="container">
-        <h2 class="is-size-4 has-text-centered">Воронка подбора персонала</h2>
-        {% include 'dashboard/table3.html' %}
-    </div>
-</body>
-</html>
+    <!-- myapp/templates/myapp/index.html -->
+    {% extends "base.html" %}
+
+    {% block title %}Вакансии и движение сотрудников{% endblock %}
+    
+    {% block content %}
+
+    <style>
+
+        .chart {
+            margin-top: 2rem;
+            margin-left: 12rem;
+            margin-right: 20rem;
+            /* margin-bottom: 10rem; */
+        }
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <div class="container" style="margin-bottom: 2rem;">
+            <h1 class="title">Dashboard - Отчеты</h1>
+        </div>
+        <div class="container">
+            <h2 class="is-size-4 has-text-centered">Работодателей и резюме на HH, с охватом всех регионов РФ</h2>
+            {% include 'dashboard/table4.html' %}
+        </div>
+
+        <div class="container">
+            <h2 class="is-size-4 has-text-centered">Воронка подбора персонала</h2>
+            {% include 'dashboard/table3.html' %}
+        </div>
+    {% endblock %}
+    
+    
+    
+    
