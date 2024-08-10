@@ -1,0 +1,14 @@
+<!-- templates/admin/login.html -->
+
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div id="content" class="colM">
+    <h1>Вход в админ-панель HR</h1>
+    <form method="post" action="{% url 'admin_login' %}">
+        {% csrf_token %}
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

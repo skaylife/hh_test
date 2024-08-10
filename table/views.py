@@ -12,7 +12,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.views import LoginView
+from django.views.decorators.csrf import csrf_exempt
 
+# @csrf_exempt
 @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(staff_member_required, name='dispatch')
 class CustomAdminLoginView(LoginView):
@@ -20,6 +22,28 @@ class CustomAdminLoginView(LoginView):
     redirect_authenticated_user = True
 
 
+from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
+import logging
+
+logger = logging.getLogger(__name__)
+
+@csrf_exempt
+def custom_admin_login(request):
+    if request.method == 'POST':
+        logger.debug(f"CSRF token received: {request.POST.get('csrfmiddlewaretoken')}")
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('admin:index')
+        else:
+            return render(request, 'admin/login.html', {'error': 'Invalid credentials'})
+    logger.debug(f"CSRF token passed to template: {request.csrf_token}")
+    return render(request, 'admin/login.html', {'csrf_token': request.csrf_token})
+
+@csrf_exempt
 def index(request):
 
     # recruitment_funnel_view(request=request) # Вызов второй таблицы 

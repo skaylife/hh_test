@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,9 +35,12 @@ CSRF_TRUSTED_ORIGINS = ['https://hh-test-s20x.onrender.com', 'https://itpro.bitr
 # CSRF_TRUSTED_ORIGINS = ['https://itpro.bitrix24.ru']
 # CSP_FRAME_ANCESTORS = "'self' *"
 # CSP_FRAME_ANCESTORS = ["*"]
+# CSRF_COOKIE_SAMESITE = 'None'  # Или 'Lax', если 'None' вызывает проблемы
+# CSRF_COOKIE_SECURE = False  # Установите в True, если используете HTTPS
+CSRF_COOKIE_SECURE = True  # Убедитесь, что используете HTTPS
 CSRF_COOKIE_SAMESITE = 'None'  # Или 'Lax', если 'None' вызывает проблемы
-CSRF_COOKIE_SECURE = False  # Установите в True, если используете HTTPS
-
+# CSRF_TRUSTED_ORIGINS = ['https://yourdomain.com']  # Замените на ваш домен
+CSRF_USE_SESSIONS = True
 
 # Application definition
 
@@ -50,14 +54,36 @@ INSTALLED_APPS = [
     'table',
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'core': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
 MIDDLEWARE = [
+    # 'core.middleware.CSRFMiddleware',  # Добавьте ваш middleware здесь
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -65,7 +91,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Убедитесь, что путь указан правильно
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +162,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LANGUAGE_CODE = 'ru-ru'
 USE_I18N = True
 
+
+CSRF_COOKIE_NAME = 'csrftoken'
